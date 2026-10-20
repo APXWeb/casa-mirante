@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="pt-BR" class="no-js">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>@@name@@ · Residência contemporânea (imóvel demonstrativo)</title>
+    <meta name="description" content="@@name@@: a construção de uma residência contemporânea acontece enquanto você rola a página, do blueprint à casa pronta. Imóvel demonstrativo." />
+    <meta name="theme-color" content="#0e0d0b" />
+    <meta property="og:title" content="@@name@@" />
+    <meta property="og:description" content="@@tagline@@" />
+    <meta property="og:image" content="img/fachada-1600.webp" />
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230e0d0b'/%3E%3Cpath d='M6 21h20M9 21v-6h16v6M7 15h20M12 15v-4h13v4' stroke='%23c8a46e' stroke-width='2' fill='none'/%3E%3C/svg%3E" />
+    <link rel="preload" as="image" href="img/poster-1600.webp" imagesrcset="img/poster-800.webp 800w, img/poster-1600.webp 1600w" imagesizes="100vw" />
+    <script>
+      document.documentElement.classList.replace('no-js', 'js')
+      if ('scrollRestoration' in history) history.scrollRestoration = 'manual'
+    </script>
+  </head>
+  <body class="@@demo@@">
+    <a class="skip" href="#ficha">Pular para a ficha do imóvel</a>
+
+    <header class="top" data-top>
+      <a class="brand" href="#abertura" aria-label="@@name@@, início">@@name@@</a>
+      <nav class="nav" aria-label="Seções">
+        <a href="#obra">A obra</a>
+        <a href="#casa">A casa</a>
+        <a href="#ficha">Ficha</a>
+        <a href="#galeria">Galeria</a>
+        <a href="#planta">Planta</a>
+      </nav>
+      <a class="btn btn-ghost top-cta" href="#contato">Agendar visita</a>
+      <span class="demo-badge" title="Os dados desta página são fictícios">Demonstrativo</span>
+    </header>
+
+    <!-- palco fixo: WebGL (ou imagens, sem WebGL) atrás das seções cinematográficas -->
+    <div class="stage" data-stage aria-hidden="true">
+      <img class="poster" src="img/poster-1600.webp" srcset="img/poster-800.webp 800w, img/poster-1600.webp 1600w" sizes="100vw" alt="" fetchpriority="high" data-poster />
+      <div class="fallback" data-fallback></div>
+      <canvas class="gl" data-gl></canvas>
+      <div class="shade"></div>
+      <div class="notes" data-notes></div>
+    </div>
+    <div class="loader" data-loader><span class="loader-bar"><i data-loader-bar></i></span><span class="loader-k">Preparando a obra</span></div>
+
+    <main>
+      <section id="abertura" class="pin pin-hero" data-pin="hero" aria-labelledby="hero-title">
+        <div class="sticky">
+          <div class="hero-copy" data-hero-copy>
+            <p class="eyebrow"><!--@heroMeta--></p>
+            <h1 id="hero-title" class="hero-title">@@name@@</h1>
+            <p class="hero-tag">@@tagline@@</p>
+          </div>
+          <div class="hero-cue" data-hero-cue>
+            <span>Role para ver a casa ser construída</span>
+            <i aria-hidden="true"></i>
+          </div>
+          <p class="scan-note" data-scan-note>Antes de ser casa, ela foi desenho.</p>
+        </div>
+      </section>
+
+      <section id="obra" class="pin pin-obra" data-pin="obra" aria-label="A construção da casa">
+        <div class="sticky">
+          <ol class="stage-caps"><!--@stages--></ol>
+          <div class="build-meter" data-meter>
+            <ol class="ticks"><!--@stageTicks--></ol>
+            <div class="bar"><i data-bar></i></div>
+            <span class="pct"><b data-pct>0</b>%</span>
+          </div>
+        </div>
+      </section>
+
+      <section id="casa" class="pin pin-casa" data-pin="casa" aria-label="Apresentação da casa pronta">
+        <div class="sticky">
+          <ol class="scene-caps"><!--@scenes--></ol>
+        </div>
+      </section>
+
+      <div class="after">
+        <section id="numeros" class="numbers" aria-label="A casa em números">
+          <p class="eyebrow">Cada ambiente</p>
+          <h2 class="display">Feita para a vista.</h2>
+          <ul class="num-list"><!--@numbers--></ul>
+        </section>
+
+        <section id="destaques" class="highlights" aria-label="Destaques da arquitetura">
+          <!--@highlights-->
+        </section>
+
+        <section class="manifesto" aria-label="Manifesto">
+          <figure class="manifesto-media"><img src="img/noite-1600.webp" srcset="img/noite-800.webp 800w, img/noite-1600.webp 1600w" sizes="100vw" alt="" loading="lazy" decoding="async" /></figure>
+          <div class="manifesto-copy">
+            <h2 class="display">Não é só uma casa.</h2>
+            <p>É o ponto do terreno em que a paisagem vira parte da sala.</p>
+          </div>
+        </section>
+
+        <section id="ficha" class="ficha paper" aria-label="Ficha do imóvel">
+          <!--@ficha-->
+          <p class="demo-note">Imóvel demonstrativo: nome, valores, áreas e características foram criados para esta apresentação e não correspondem a uma propriedade real à venda.</p>
+        </section>
+
+        <section id="galeria" class="gallery" aria-labelledby="gal-title">
+          <div class="sec-head">
+            <p class="eyebrow">Galeria</p>
+            <h2 id="gal-title" class="display">Fachada, interiores e detalhes.</h2>
+            <p class="muted small">Imagens renderizadas a partir do modelo 3D da casa.</p>
+          </div>
+          <div class="chips" role="group" aria-label="Filtrar imagens"><!--@galleryFilters--></div>
+          <ul class="g-grid" data-grid><!--@gallery--></ul>
+          <script type="application/json" data-gallery><!--@galleryData--></script>
+        </section>
+
+        <section id="planta" class="plan paper" aria-labelledby="plan-title">
+          <div class="sec-head">
+            <p class="eyebrow">Planta e localização</p>
+            <h2 id="plan-title" class="display">Dois pavimentos, uma vista.</h2>
+          </div>
+          <div class="plan-tabs" role="tablist" aria-label="Pavimento">
+            <button type="button" role="tab" id="tab-ground" aria-controls="plan-ground" aria-selected="true" class="chip is-on">Térreo</button>
+            <button type="button" role="tab" id="tab-upper" aria-controls="plan-upper" aria-selected="false" class="chip" tabindex="-1">Superior</button>
+          </div>
+          <div class="plan-panels">
+            <div id="plan-ground" role="tabpanel" aria-labelledby="tab-ground" class="plan-panel"><!--@planGround--></div>
+            <div id="plan-upper" role="tabpanel" aria-labelledby="tab-upper" class="plan-panel" hidden><!--@planUpper--></div>
+          </div>
+          <div class="location"><!--@location--></div>
+        </section>
+
+        <section id="contato" class="contact" aria-labelledby="contact-title">
+          <figure class="contact-media"><img src="img/fachada-1600.webp" srcset="img/fachada-800.webp 800w, img/fachada-1600.webp 1600w" sizes="100vw" alt="" loading="lazy" decoding="async" /></figure>
+          <div class="contact-inner">
+            <div class="contact-copy">
+              <p class="eyebrow">Visita</p>
+              <h2 id="contact-title" class="display">Conheça a casa pessoalmente.</h2>
+              <p>Agende uma visita ou peça mais informações. Respondemos com disponibilidade de datas e a documentação do imóvel.</p>
+              <!--@contactAgent-->
+              <a class="btn btn-wa" href="#" data-wa hidden>Conversar pelo WhatsApp</a>
+            </div>
+            <form class="form" data-form novalidate>
+              <div class="field"><label for="f-name">Nome</label><input id="f-name" name="name" autocomplete="name" required /></div>
+              <div class="field"><label for="f-phone">Telefone</label><input id="f-phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" required /></div>
+              <div class="field"><label for="f-email">E-mail <span class="opt">(opcional)</span></label><input id="f-email" name="email" type="email" autocomplete="email" /></div>
+              <fieldset class="field field-radio">
+                <legend>Como prefere conhecer?</legend>
+                <label><input type="radio" name="kind" value="Visita presencial" checked /> Visita presencial</label>
+                <label><input type="radio" name="kind" value="Chamada de vídeo" /> Chamada de vídeo</label>
+                <label><input type="radio" name="kind" value="Somente informações" /> Somente informações</label>
+              </fieldset>
+              <div class="field"><label for="f-msg">Mensagem <span class="opt">(opcional)</span></label><textarea id="f-msg" name="message" rows="3"></textarea></div>
+              <button class="btn btn-solid" type="submit">Solicitar visita</button>
+              <p class="form-status" data-status role="status" aria-live="polite"></p>
+            </form>
+          </div>
+          <script type="application/json" data-contact><!--@contactConfig--></script>
+        </section>
+      </div>
+    </main>
+
+    <footer class="foot">
+      <p class="foot-brand">@@name@@</p>
+      <p>Imóvel demonstrativo. A casa, as imagens e os dados desta página foram criados para apresentar esta experiência.</p>
+      <p class="muted small">Imagens geradas a partir do modelo 3D desta página. Céu HDRI, texturas e mobiliário: Poly Haven (CC0). Fontes Fraunces e Figtree (OFL).</p>
+    </footer>
+
+    <dialog class="lightbox" data-lightbox aria-label="Galeria ampliada">
+      <figure class="lb-fig" data-lb-fig><figcaption data-lb-cap></figcaption></figure>
+      <button type="button" class="lb-btn lb-prev" data-lb-prev aria-label="Imagem anterior">‹</button>
+      <button type="button" class="lb-btn lb-next" data-lb-next aria-label="Próxima imagem">›</button>
+      <button type="button" class="lb-close" data-lb-close aria-label="Fechar">Fechar</button>
+      <p class="lb-count" data-lb-count></p>
+    </dialog>
+
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>

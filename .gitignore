@@ -1,0 +1,6 @@
+node_modules
+dist
+.asset-cache
+test-results
+playwright-report
+.dev.log
