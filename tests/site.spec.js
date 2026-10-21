@@ -1,9 +1,9 @@
 import { test, expect } from '@playwright/test'
-import { houseAreas } from '../src/data/house.js'
-import { property, gallery, stages } from '../src/data/property.js'
+import { property, gallery, stages, scenes } from '../src/data/property.js'
+import { media } from '../src/data/media.js'
 
 // rola até uma fração de uma seção fixada (ou até o topo de uma seção comum)
-async function scrollTo(page, name, p = 0) {
+async function scrollTo(page, name, p = 0, wait = 450) {
   await page.evaluate(
     ([name, p]) => {
       const el = document.querySelector(`[data-pin="${name}"]`) || document.getElementById(name)
@@ -13,11 +13,21 @@ async function scrollTo(page, name, p = 0) {
     },
     [name, p],
   )
-  await page.waitForTimeout(350)
+  await page.waitForTimeout(wait)
 }
 
-const ready = (page) => page.waitForFunction(() => document.documentElement.matches('.gl-ready, .no-gl'), null, { timeout: 60_000 })
-const buildP = (page) => page.evaluate(() => window.__cm.world.director.P)
+const ready = (page) => page.waitForFunction(() => document.documentElement.classList.contains('cm-ready'), null, { timeout: 30_000 })
+const clipsReady = (page, ids) =>
+  page.waitForFunction(
+    (ids) => {
+      const c = window.__cm.clips
+      const all = { drone: c.drone, fachada: c.fachada, ...Object.fromEntries(c.scenes.map((s) => [s.id, s])) }
+      return ids.every((id) => all[id].ready)
+    },
+    ids,
+    { timeout: 60_000 },
+  )
+const videoTime = (page, sel) => page.evaluate((sel) => document.querySelector(sel).currentTime, sel)
 
 function collectErrors(page) {
   const errors = []
@@ -27,76 +37,129 @@ function collectErrors(page) {
   return errors
 }
 
-test('carrega sem erros e o 3D fica pronto', async ({ page }) => {
+test('todas as mídias são da mesma casa e têm origem e licença registradas', () => {
+  const ids = [...Object.values(media.clips).map((c) => c.pexels), ...media.stills.map((s) => s.pexels)]
+  // um único lote de filmagem do autor (setembro de 2026)
+  for (const id of ids) expect(id, String(id)).toBeGreaterThanOrEqual(39576501)
+  for (const id of ids) expect(id, String(id)).toBeLessThanOrEqual(39576534)
+  for (const c of Object.values(media.clips)) expect(c.page).toMatch(/^https:\/\/www\.pexels\.com\/video\//)
+  expect(media.license.url).toBe('https://www.pexels.com/license/')
+  expect(media.author.name).toBe('Alef Morais')
+})
+
+test('carrega sem erros, com o vídeo real da abertura', async ({ page }) => {
   const errors = collectErrors(page)
   await page.goto('/')
   await ready(page)
-  await expect(page.locator('html')).toHaveClass(/gl-ready/)
   await expect(page.locator('h1')).toHaveText(property.name)
+  await clipsReady(page, ['drone'])
+  await expect(page.locator('.l-hero video')).toHaveClass(/is-ready/)
+  await expect(page.locator('#creditos a[href="https://www.pexels.com/license/"]')).toHaveCount(1)
   expect(errors).toEqual([])
 })
 
-test('a obra acompanha a rolagem para frente e para trás', async ({ page }) => {
+test('o voo da abertura acompanha a rolagem nos dois sentidos', async ({ page }) => {
   await page.goto('/')
   await ready(page)
-  await scrollTo(page, 'obra', 0.03)
-  expect(await buildP(page)).toBeLessThan(0.02)
-  await expect(page.locator('.stage-cap.is-on .eyebrow')).toContainText(stages[0].kicker)
-
-  const samples = []
-  for (const p of [0.2, 0.4, 0.6, 0.8, 0.97]) {
-    await scrollTo(page, 'obra', p)
-    samples.push(await buildP(page))
+  await clipsReady(page, ['drone'])
+  const t = []
+  for (const p of [0.15, 0.45, 0.8]) {
+    await scrollTo(page, 'hero', p, 700)
+    t.push(await videoTime(page, '.l-hero video'))
   }
-  for (let i = 1; i < samples.length; i++) expect(samples[i]).toBeGreaterThan(samples[i - 1])
-  expect(samples.at(-1)).toBeGreaterThan(0.99)
-  await expect(page.locator('[data-pct]')).toHaveText('100')
-  await expect(page.locator('.stage-cap[data-stage="4"]')).toHaveClass(/is-on/)
-
-  // volta: a casa "desconstrói" e a etapa volta
-  await scrollTo(page, 'obra', 0.25)
-  const back = await buildP(page)
-  expect(back).toBeGreaterThan(0.2)
-  expect(back).toBeLessThan(0.26)
-  await expect(page.locator('.stage-cap[data-stage="1"]')).toHaveClass(/is-on/)
+  expect(t[1]).toBeGreaterThan(t[0] + 2)
+  expect(t[2]).toBeGreaterThan(t[1] + 2)
+  await scrollTo(page, 'hero', 0.3, 700)
+  const back = await videoTime(page, '.l-hero video')
+  expect(back).toBeLessThan(t[1])
+  expect(back).toBeGreaterThan(t[0])
 })
 
-test('abertura faz a varredura para o blueprint e a apresentação troca de cena', async ({ page }) => {
+test('revelação da fachada: desenho, volumes, materiais e casa pronta, reversível', async ({ page }) => {
   await page.goto('/')
   await ready(page)
-  await scrollTo(page, 'abertura', 0.6)
-  const wipe = await page.evaluate(() => window.__cm.world.director.wipe)
-  expect(wipe).toBeGreaterThan(0)
-  expect(wipe).toBeLessThan(1)
-  await scrollTo(page, 'casa', 0.3)
-  await expect(page.locator('.scene-cap.is-on')).toHaveAttribute('data-scene', '1')
-  await scrollTo(page, 'casa', 0.97)
-  await expect(page.locator('.scene-cap.is-on')).toHaveAttribute('data-scene', '4')
+  await clipsReady(page, ['fachada'])
+  const state = () =>
+    page.evaluate(() => ({
+      line: parseFloat(getComputedStyle(document.querySelector('.ln[data-group="volume"]')).strokeDashoffset),
+      fill: Number(getComputedStyle(document.querySelector('[data-fill="7"]')).opacity),
+      wood: Number(document.querySelector('[data-mat="madeira"]').style.getPropertyValue('--m') || 0),
+      env: Number(document.querySelector('[data-env]').style.getPropertyValue('--r') || 0),
+      clip: document.querySelector('[data-sheet]').style.clipPath,
+      video: Number(getComputedStyle(document.querySelector('.plate-video')).opacity),
+      time: document.querySelector('.plate-video').currentTime,
+    }))
+  await scrollTo(page, 'obra', 0.2)
+  let s = await state()
+  expect(s.line).toBeLessThan(0.05)
+  expect(s.fill).toBe(0)
+  await expect(page.locator('.stage-cap.is-on')).toHaveAttribute('data-stage', '0')
+
+  await scrollTo(page, 'obra', 0.46)
+  s = await state()
+  expect(s.fill).toBeGreaterThan(0.9)
+  expect(s.wood).toBe(0)
+  await expect(page.locator('.stage-cap.is-on')).toHaveAttribute('data-stage', '1')
+
+  await scrollTo(page, 'obra', 0.66)
+  s = await state()
+  expect(s.wood).toBe(1)
+  await expect(page.locator('.stage-cap.is-on')).toHaveAttribute('data-stage', '2')
+
+  await scrollTo(page, 'obra', 0.99, 900)
+  s = await state()
+  expect(s.env).toBe(1)
+  expect(s.clip).toMatch(/^inset\(0px( 0px 0px 0px)?( round 0px)?\)$/)
+  expect(s.video).toBe(1)
+  expect(s.time).toBeLessThan(media.plateTime - 1)
+  await expect(page.locator('.stage-cap.is-on')).toHaveAttribute('data-stage', String(stages.length - 1))
+
+  // volta: o desenho reaparece e os volumes somem
+  await scrollTo(page, 'obra', 0.2)
+  s = await state()
+  expect(s.fill).toBe(0)
+  expect(s.wood).toBe(0)
+  await expect(page.locator('.stage-cap.is-on')).toHaveAttribute('data-stage', '0')
 })
 
-test('ficha completa depois do cinema, com dados conferidos contra o modelo', async ({ page }) => {
-  const a = houseAreas()
-  expect(property.facts.builtArea).toBe(a.built)
-  expect(property.facts.lotArea).toBe(a.lot)
+test('ambientes: cada cena é um vídeo real guiado pela rolagem', async ({ page }) => {
+  await page.goto('/')
+  await ready(page)
+  await clipsReady(page, scenes.map((s) => s.clip))
+  const n = scenes.length
+  for (const k of [2, 5]) {
+    await scrollTo(page, 'casa', (k + 0.45) / n, 700)
+    await expect(page.locator('.scene-cap.is-on')).toHaveAttribute('data-scene', String(k))
+    await expect(page.locator(`.l-scenes .scene[data-scene="${k}"]`)).toHaveClass(/is-on/)
+    const a = await videoTime(page, `.l-scenes .scene[data-scene="${k}"] video`)
+    await scrollTo(page, 'casa', (k + 0.8) / n, 700)
+    const b = await videoTime(page, `.l-scenes .scene[data-scene="${k}"] video`)
+    expect(b).toBeGreaterThan(a + 0.5)
+  }
+  await scrollTo(page, 'casa', 0.97, 700)
+  await expect(page.locator('.scene-cap.is-on')).toHaveAttribute('data-scene', String(n - 1))
+})
+
+test('ficha completa, com dados ilustrativos marcados', async ({ page }) => {
   await page.goto('/#ficha')
-  await page.waitForTimeout(800)
+  await page.waitForTimeout(900)
   const ficha = page.locator('#ficha')
   await expect(ficha).toBeInViewport()
-  await expect(ficha.locator('.price-v')).toContainText('8.900.000')
-  await expect(ficha.locator('.facts li')).toHaveCount(6)
-  await expect(ficha.locator('.facts')).toContainText('488')
+  await expect(ficha.locator('.price-v')).toContainText('6.900.000')
+  await expect(ficha.locator('.price-note .tag-illus')).toBeVisible()
+  await expect(ficha.locator('.facts li')).toHaveCount(property.facts.length)
+  await expect(ficha.locator('.facts .tag-illus')).toHaveCount(property.facts.filter((f) => f.illustrative).length)
   await expect(ficha.locator('.feat')).toHaveCount(property.features.length)
-  await expect(ficha.locator('.add-row.is-pending')).toHaveCount(4)
-  await expect(ficha.locator('.demo-note')).toBeVisible()
-  // a ficha vem depois das seções cinematográficas
-  const order = await page.evaluate(() => ['obra', 'casa', 'ficha'].map((id) => document.getElementById(id).getBoundingClientRect().top))
-  expect(order[0]).toBeLessThan(order[1])
-  expect(order[1]).toBeLessThan(order[2])
+  await expect(ficha.locator('.add-row.is-pending')).toHaveCount(property.additional.filter((a) => a.value == null).length)
+  await expect(ficha.locator('.disclaimer')).toContainText('ilustrativos')
+  await expect(ficha.locator('iframe.map')).toHaveCount(0)
+  await expect(ficha.locator('.map-empty')).toContainText(property.address.region)
+  await expect(ficha.locator('.ficha-actions a[href="#galeria"]')).toContainText(String(gallery.length))
 })
 
 test('galeria abre, navega, filtra e fecha', async ({ page }) => {
   await page.goto('/#galeria')
-  await page.waitForTimeout(600)
+  await page.waitForTimeout(700)
   const items = page.locator('.g-item')
   await expect(items).toHaveCount(gallery.length)
   await items.first().locator('button').click()
@@ -107,8 +170,7 @@ test('galeria abre, navega, filtra e fecha', async ({ page }) => {
   await expect(dlg.locator('[data-lb-count]')).toHaveText(`2 / ${gallery.length}`)
   await page.keyboard.press('ArrowLeft')
   await expect(dlg.locator('[data-lb-count]')).toHaveText(`1 / ${gallery.length}`)
-  const ok = await dlg.locator('img').evaluate((img) => img.complete && img.naturalWidth > 0)
-  expect(ok).toBe(true)
+  await expect.poll(() => dlg.locator('img').evaluate((img) => img.complete && img.naturalWidth > 0)).toBe(true)
   await page.keyboard.press('Escape')
   await expect(dlg).toBeHidden()
   await page.locator('[data-filter="Interiores"]').click()
@@ -118,7 +180,8 @@ test('galeria abre, navega, filtra e fecha', async ({ page }) => {
 test('todas as imagens da página carregam', async ({ page }) => {
   await page.goto('/')
   const broken = await page.evaluate(async () => {
-    const imgs = [...document.querySelectorAll('main img, .stage img')]
+    // a imagem da lightbox só recebe src ao abrir
+    const imgs = [...document.querySelectorAll('img[src]')]
     await Promise.all(
       imgs.map((img) => {
         img.loading = 'eager'
@@ -130,27 +193,15 @@ test('todas as imagens da página carregam', async ({ page }) => {
   expect(broken).toEqual([])
 })
 
-test('planta alterna pavimentos e localização não inventa mapa', async ({ page }) => {
-  await page.goto('/#planta')
-  await page.waitForTimeout(600)
-  await expect(page.locator('#plan-ground svg')).toBeVisible()
-  await page.locator('#tab-upper').click()
-  await expect(page.locator('#plan-upper svg')).toBeVisible()
-  await expect(page.locator('#plan-ground')).toBeHidden()
-  await expect(page.locator('#plan-upper')).toContainText('Suíte principal')
-  await expect(page.locator('iframe.map')).toHaveCount(0)
-  await expect(page.locator('.map-empty')).toContainText('coordenadas')
-})
-
 test('contato valida e funciona em modo demonstração', async ({ page }) => {
   await page.goto('/#contato')
-  await page.waitForTimeout(600)
+  await page.waitForTimeout(700)
   await expect(page.locator('[data-wa]')).toBeHidden()
   await page.getByRole('button', { name: 'Solicitar visita' }).click()
   await expect(page.locator('[data-status]')).toContainText('Informe seu nome')
   await expect(page.locator('#f-name')).toHaveAttribute('aria-invalid', 'true')
   await page.fill('#f-name', 'Maria Souza')
-  await page.fill('#f-phone', '(11) 98888-7777')
+  await page.fill('#f-phone', '(71) 98888-7777')
   await page.getByRole('button', { name: 'Solicitar visita' }).click()
   await expect(page.locator('[data-status]')).toContainText('demonstração')
 })
@@ -160,22 +211,27 @@ test('links do menu levam às seções', async ({ page, isMobile }) => {
   await page.goto('/')
   await ready(page)
   await page.locator('.nav a[href="#ficha"]').click()
-  await page.waitForTimeout(2200)
+  await page.waitForTimeout(2600)
   await expect(page.locator('#ficha .ficha-name')).toBeInViewport()
   await page.locator('.top-cta').click()
-  await page.waitForTimeout(2200)
+  await page.waitForTimeout(2600)
   await expect(page.locator('#contact-title')).toBeInViewport()
 })
 
-test('sem WebGL a progressão usa quadros renderizados', async ({ page }) => {
+test('modo de quadros fixos (?stills) não baixa vídeos e mantém a revelação', async ({ page }) => {
   const errors = collectErrors(page)
-  await page.goto('/?no3d')
+  const videos = []
+  page.on('request', (r) => r.url().endsWith('.mp4') && videos.push(r.url()))
+  await page.goto('/?stills')
   await ready(page)
-  await expect(page.locator('html')).toHaveClass(/no-gl/)
-  await scrollTo(page, 'obra', 0.5)
-  const visible = await page.evaluate(() => [...document.querySelectorAll('[data-fallback] img')].filter((i) => Number(i.style.opacity) > 0.5).map((i) => i.src))
-  expect(visible.length).toBeGreaterThan(0)
-  expect(visible.join()).toMatch(/obra-0[56]/)
+  await scrollTo(page, 'obra', 0.99)
+  expect(await page.evaluate(() => Number(document.querySelector('[data-env]').style.getPropertyValue('--r')))).toBe(1)
+  await scrollTo(page, 'casa', 0.4)
+  const k = Math.floor(0.4 * scenes.length)
+  const poster = page.locator(`.l-scenes .scene[data-scene="${k}"] .poster img`)
+  await expect(poster).toBeVisible()
+  expect(await poster.evaluate((i) => i.complete && i.naturalWidth > 0)).toBe(true)
+  expect(videos).toEqual([])
   expect(errors).toEqual([])
 })
 
@@ -183,8 +239,9 @@ test('movimento reduzido mantém a página navegável', async ({ page }) => {
   await page.emulateMedia({ reducedMotion: 'reduce' })
   await page.goto('/')
   await ready(page)
+  expect(await page.evaluate(() => window.__cm.stillsOnly)).toBe(true)
   await scrollTo(page, 'obra', 0.6)
-  expect(await buildP(page)).toBeGreaterThan(0.55)
+  await expect(page.locator('.stage-cap.is-on')).toHaveAttribute('data-stage', '2')
   await scrollTo(page, 'ficha')
   await expect(page.locator('.facts li').first()).toBeVisible()
 })
@@ -192,9 +249,17 @@ test('movimento reduzido mantém a página navegável', async ({ page }) => {
 test('sem rolagem horizontal', async ({ page }) => {
   await page.goto('/')
   await ready(page)
-  for (const id of ['numeros', 'destaques', 'ficha', 'galeria', 'planta', 'contato']) {
-    await scrollTo(page, id)
+  for (const [id, p] of [
+    ['hero', 0.5],
+    ['obra', 0.3],
+    ['obra', 0.95],
+    ['casa', 0.5],
+    ['galeria', 0],
+    ['ficha', 0],
+    ['contato', 0],
+  ]) {
+    await scrollTo(page, id, p)
     const over = await page.evaluate(() => document.documentElement.scrollWidth - innerWidth)
-    expect(over, id).toBeLessThanOrEqual(0)
+    expect(over, `${id} ${p}`).toBeLessThanOrEqual(0)
   }
 })

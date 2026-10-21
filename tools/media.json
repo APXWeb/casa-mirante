@@ -1,0 +1,493 @@
+{
+ "note": "Fonte de verdade das mídias do site. Gerado/consumido por tools/media.py. Todas as mídias são da mesma filmagem de uma única casa.",
+ "author": {
+  "name": "Alef Morais",
+  "profile": "https://www.pexels.com/@alef-morais-336305364/",
+  "location": "Bahia, Brasil (perfil do autor)"
+ },
+ "license": {
+  "name": "Licença Pexels",
+  "url": "https://www.pexels.com/license/",
+  "summary": "Uso gratuito, inclusive comercial, com permissão para editar; não exige atribuição. Não permite sugerir endosso de pessoas ou marcas, revender cópias sem alteração nem redistribuir em bancos de imagem."
+ },
+ "session": "Lote de vídeos publicado pelo autor em setembro de 2026 (IDs 39576501 a 39576534).",
+ "clips": [
+  {
+   "id": "drone",
+   "pexels": 39576520,
+   "title": "Luxury Beachfront Property with Modern Design",
+   "page": "https://www.pexels.com/video/luxury-beachfront-property-with-modern-design-39576520/",
+   "range": [
+    0,
+    22.0
+   ],
+   "focalX": 0.44,
+   "alt": "Chegada aérea: a orla, o condomínio e a lagoa atrás da casa",
+   "files": {
+    "uhd": "https://videos.pexels.com/video-files/39576520/16868275_3840_2160_30fps.mp4",
+    "fhd": "https://videos.pexels.com/video-files/39576520/16868273_1920_1080_30fps.mp4"
+   }
+  },
+  {
+   "id": "fachada",
+   "pexels": 39576524,
+   "title": "Modern Beachfront House with Palm Trees",
+   "page": "https://www.pexels.com/video/modern-beachfront-house-with-palm-trees-39576524/",
+   "range": [
+    0,
+    12.48
+   ],
+   "focalX": 0.4948,
+   "alt": "Fachada frontal entre palmeiras",
+   "files": {
+    "uhd": "https://videos.pexels.com/video-files/39576524/16868215_3840_2160_30fps.mp4",
+    "fhd": "https://videos.pexels.com/video-files/39576524/16868200_1920_1080_30fps.mp4"
+   }
+  },
+  {
+   "id": "entrada",
+   "pexels": 39576517,
+   "title": "Modern Beachfront Villa Entrance - Luxurious Real Estate",
+   "page": "https://www.pexels.com/video/modern-beachfront-villa-entrance-luxurious-real-estate-39576517/",
+   "range": [
+    0,
+    8.0
+   ],
+   "focalX": 0.5,
+   "alt": "Porta pivotante de madeira se abrindo",
+   "files": {
+    "uhd": "https://videos.pexels.com/video-files/39576517/16868219_3840_2160_30fps.mp4",
+    "fhd": "https://videos.pexels.com/video-files/39576517/16868204_1920_1080_30fps.mp4"
+   }
+  },
+  {
+   "id": "escada",
+   "pexels": 39576527,
+   "title": "Elegant Modern Interior Stairway Design",
+   "page": "https://www.pexels.com/video/elegant-modern-interior-stairway-design-39576527/",
+   "range": [
+    0,
+    7.0
+   ],
+   "focalX": 0.42,
+   "alt": "Escada de pedra com guarda-corpo de vidro e jardim interno",
+   "files": {
+    "uhd": "https://videos.pexels.com/video-files/39576527/16868113_3840_2160_30fps.mp4",
+    "fhd": "https://videos.pexels.com/video-files/39576527/16868104_1920_1080_30fps.mp4"
+   }
+  },
+  {
+   "id": "estar",
+   "pexels": 39576515,
+   "title": "Modern Cozy Interior with Soft Lighting",
+   "page": "https://www.pexels.com/video/modern-cozy-interior-with-soft-lighting-39576515/",
+   "range": [
+    0,
+    7.0
+   ],
+   "focalX": 0.55,
+   "alt": "Estar com poltronas, sofá claro e mesa de madeira",
+   "files": {
+    "uhd": "https://videos.pexels.com/video-files/39576515/16868161_3840_2160_30fps.mp4",
+    "fhd": "https://videos.pexels.com/video-files/39576515/16868149_1920_1080_30fps.mp4"
+   }
+  },
+  {
+   "id": "jantar",
+   "pexels": 39576532,
+   "title": "Modern Dining Room with Scenic Views",
+   "page": "https://www.pexels.com/video/modern-dining-room-with-scenic-views-39576532/",
+   "range": [
+    0,
+    8.0
+   ],
+   "focalX": 0.5,
+   "alt": "Jantar e estar integrados, com pendentes de fibra",
+   "files": {
+    "uhd": "https://videos.pexels.com/video-files/39576532/16868216_3840_2160_30fps.mp4",
+    "fhd": "https://videos.pexels.com/video-files/39576532/16868203_1920_1080_30fps.mp4"
+   }
+  },
+  {
+   "id": "suite",
+   "pexels": 39576531,
+   "title": "Elegant Modern Bedroom with Lake View",
+   "page": "https://www.pexels.com/video/elegant-modern-bedroom-with-lake-view-39576531/",
+   "range": [
+    0,
+    6.0
+   ],
+   "focalX": 0.42,
+   "alt": "Suíte com cabeceira de madeira e vista para a lagoa",
+   "files": {
+    "uhd": "https://videos.pexels.com/video-files/39576531/16868133_3840_2160_30fps.mp4",
+    "fhd": "https://videos.pexels.com/video-files/39576531/16868124_1920_1080_30fps.mp4"
+   }
+  },
+  {
+   "id": "varanda",
+   "pexels": 39576530,
+   "title": "Luxurious Coastal Home with Private Pool View",
+   "page": "https://www.pexels.com/video/luxurious-coastal-home-with-private-pool-view-39576530/",
+   "range": [
+    0,
+    5.0
+   ],
+   "focalX": 0.55,
+   "alt": "Varanda superior sobre a piscina, com a lagoa ao fundo",
+   "files": {
+    "uhd": "https://videos.pexels.com/video-files/39576530/16868224_3840_2160_30fps.mp4",
+    "fhd": "https://videos.pexels.com/video-files/39576530/16868217_1920_1080_30fps.mp4"
+   }
+  },
+  {
+   "id": "pergolado",
+   "pexels": 39576516,
+   "title": "Modern Patio with Scenic Lake View at Sunset",
+   "page": "https://www.pexels.com/video/modern-patio-with-scenic-lake-view-at-sunset-39576516/",
+   "range": [
+    0,
+    7.0
+   ],
+   "focalX": 0.5,
+   "alt": "Deck sob o pergolado, voltado para a lagoa",
+   "files": {
+    "uhd": "https://videos.pexels.com/video-files/39576516/16868163_3840_2160_30fps.mp4",
+    "fhd": "https://videos.pexels.com/video-files/39576516/16868152_1920_1080_30fps.mp4"
+   }
+  },
+  {
+   "id": "piscina",
+   "pexels": 39576513,
+   "title": "Luxurious Modern Home with Pool and Palm View",
+   "page": "https://www.pexels.com/video/luxurious-modern-home-with-pool-and-palm-view-39576513/",
+   "range": [
+    0,
+    7.0
+   ],
+   "focalX": 0.6,
+   "alt": "Piscina em raia junto à fachada envidraçada",
+   "files": {
+    "uhd": "https://videos.pexels.com/video-files/39576513/16868114_3840_2160_30fps.mp4",
+    "fhd": "https://videos.pexels.com/video-files/39576513/16868106_1920_1080_30fps.mp4"
+   }
+  },
+  {
+   "id": "lagoa",
+   "pexels": 39576529,
+   "title": "Serene Tropical Lake and Palm Trees View",
+   "page": "https://www.pexels.com/video/serene-tropical-lake-and-palm-trees-view-39576529/",
+   "range": [
+    0,
+    8.0
+   ],
+   "focalX": 0.5,
+   "alt": "A lagoa e as palmeiras vistas de dentro da casa",
+   "files": {
+    "uhd": "https://videos.pexels.com/video-files/39576529/16868142_3840_2160_30fps.mp4",
+    "fhd": "https://videos.pexels.com/video-files/39576529/16868129_1920_1080_30fps.mp4"
+   }
+  }
+ ],
+ "stills": [
+  {
+   "id": "fachada-frontal",
+   "pexels": 39576524,
+   "t": 12.35,
+   "alt": "Fachada frontal com escada de lâminas flutuantes e palmeiras",
+   "group": "Fachada",
+   "page": "https://www.pexels.com/video/modern-beachfront-house-with-palm-trees-39576524/",
+   "files": {
+    "uhd": "https://videos.pexels.com/video-files/39576524/16868215_3840_2160_30fps.mp4",
+    "fhd": "https://videos.pexels.com/video-files/39576524/16868200_1920_1080_30fps.mp4"
+   },
+   "portrait": false
+  },
+  {
+   "id": "fachada-jardim",
+   "pexels": 39576523,
+   "t": 8.5,
+   "alt": "Fachada e jardim frontal vistos da calçada",
+   "group": "Fachada",
+   "page": "https://www.pexels.com/video/modern-beachfront-villa-with-tropical-garden-39576523/",
+   "files": {
+    "uhd": "https://videos.pexels.com/video-files/39576523/16868251_3840_2160_30fps.mp4",
+    "fhd": "https://videos.pexels.com/video-files/39576523/16868247_1920_1080_30fps.mp4"
+   },
+   "portrait": false
+  },
+  {
+   "id": "fachada-lateral",
+   "pexels": 39576506,
+   "t": 3.0,
+   "alt": "A casa vista em diagonal, com o caminho de acesso",
+   "group": "Fachada",
+   "page": "https://www.pexels.com/video/modern-beachfront-home-with-palm-trees-39576506/",
+   "files": {
+    "uhd": "https://videos.pexels.com/video-files/39576506/16868209_3840_2160_30fps.mp4",
+    "fhd": "https://videos.pexels.com/video-files/39576506/16868196_1920_1080_30fps.mp4"
+   },
+   "portrait": false
+  },
+  {
+   "id": "entrada",
+   "pexels": 39576517,
+   "t": 0.6,
+   "alt": "Porta pivotante de madeira entre painéis de pedra clara",
+   "group": "Fachada",
+   "page": "https://www.pexels.com/video/modern-beachfront-villa-entrance-luxurious-real-estate-39576517/",
+   "files": {
+    "uhd": "https://videos.pexels.com/video-files/39576517/16868219_3840_2160_30fps.mp4",
+    "fhd": "https://videos.pexels.com/video-files/39576517/16868204_1920_1080_30fps.mp4"
+   },
+   "portrait": false
+  },
+  {
+   "id": "aerea-lagoa",
+   "pexels": 39576520,
+   "t": 17.0,
+   "alt": "Vista aérea da casa com a lagoa ao fundo",
+   "group": "Entorno",
+   "page": "https://www.pexels.com/video/luxury-beachfront-property-with-modern-design-39576520/",
+   "files": {
+    "uhd": "https://videos.pexels.com/video-files/39576520/16868275_3840_2160_30fps.mp4",
+    "fhd": "https://videos.pexels.com/video-files/39576520/16868273_1920_1080_30fps.mp4"
+   },
+   "portrait": false
+  },
+  {
+   "id": "aerea-orla",
+   "pexels": 39576520,
+   "t": 1.0,
+   "alt": "Vista aérea com a orla atlântica ao fundo",
+   "group": "Entorno",
+   "page": "https://www.pexels.com/video/luxury-beachfront-property-with-modern-design-39576520/",
+   "files": {
+    "uhd": "https://videos.pexels.com/video-files/39576520/16868275_3840_2160_30fps.mp4",
+    "fhd": "https://videos.pexels.com/video-files/39576520/16868273_1920_1080_30fps.mp4"
+   },
+   "portrait": false
+  },
+  {
+   "id": "orla",
+   "pexels": 39576522,
+   "t": 6.0,
+   "alt": "A orla registrada na mesma filmagem",
+   "group": "Entorno",
+   "page": "https://www.pexels.com/video/stunning-aerial-view-of-coastal-beachfront-39576522/",
+   "files": {
+    "uhd": "https://videos.pexels.com/video-files/39576522/16868222_3840_2160_30fps.mp4",
+    "fhd": "https://videos.pexels.com/video-files/39576522/16868213_1920_1080_30fps.mp4"
+   },
+   "portrait": false
+  },
+  {
+   "id": "piscina",
+   "pexels": 39576513,
+   "t": 3.5,
+   "alt": "Piscina em raia ao longo da fachada de vidro",
+   "group": "Áreas externas",
+   "page": "https://www.pexels.com/video/luxurious-modern-home-with-pool-and-palm-view-39576513/",
+   "files": {
+    "uhd": "https://videos.pexels.com/video-files/39576513/16868114_3840_2160_30fps.mp4",
+    "fhd": "https://videos.pexels.com/video-files/39576513/16868106_1920_1080_30fps.mp4"
+   },
+   "portrait": false
+  },
+  {
+   "id": "varanda",
+   "pexels": 39576530,
+   "t": 2.5,
+   "alt": "Da varanda superior: a piscina e a lagoa",
+   "group": "Áreas externas",
+   "page": "https://www.pexels.com/video/luxurious-coastal-home-with-private-pool-view-39576530/",
+   "files": {
+    "uhd": "https://videos.pexels.com/video-files/39576530/16868224_3840_2160_30fps.mp4",
+    "fhd": "https://videos.pexels.com/video-files/39576530/16868217_1920_1080_30fps.mp4"
+   },
+   "portrait": false
+  },
+  {
+   "id": "pergolado",
+   "pexels": 39576516,
+   "t": 3.5,
+   "alt": "Deck de madeira sob o pergolado",
+   "group": "Áreas externas",
+   "page": "https://www.pexels.com/video/modern-patio-with-scenic-lake-view-at-sunset-39576516/",
+   "files": {
+    "uhd": "https://videos.pexels.com/video-files/39576516/16868163_3840_2160_30fps.mp4",
+    "fhd": "https://videos.pexels.com/video-files/39576516/16868152_1920_1080_30fps.mp4"
+   },
+   "portrait": false
+  },
+  {
+   "id": "agua",
+   "pexels": 39576519,
+   "t": 4.0,
+   "alt": "Detalhe da água da piscina ao sol",
+   "group": "Áreas externas",
+   "page": "https://www.pexels.com/video/relaxing-view-of-sunlit-pool-water-39576519/",
+   "files": {
+    "uhd": "https://videos.pexels.com/video-files/39576519/16868165_3840_2160_30fps.mp4",
+    "fhd": "https://videos.pexels.com/video-files/39576519/16868154_1920_1080_30fps.mp4"
+   },
+   "portrait": false
+  },
+  {
+   "id": "lagoa",
+   "pexels": 39576529,
+   "t": 6.0,
+   "alt": "A lagoa vista de dentro da casa",
+   "group": "Entorno",
+   "page": "https://www.pexels.com/video/serene-tropical-lake-and-palm-trees-view-39576529/",
+   "files": {
+    "uhd": "https://videos.pexels.com/video-files/39576529/16868142_3840_2160_30fps.mp4",
+    "fhd": "https://videos.pexels.com/video-files/39576529/16868129_1920_1080_30fps.mp4"
+   },
+   "portrait": false
+  },
+  {
+   "id": "estar",
+   "pexels": 39576515,
+   "t": 3.5,
+   "alt": "Estar com poltronas e mesa de centro de madeira",
+   "group": "Interiores",
+   "page": "https://www.pexels.com/video/modern-cozy-interior-with-soft-lighting-39576515/",
+   "files": {
+    "uhd": "https://videos.pexels.com/video-files/39576515/16868161_3840_2160_30fps.mp4",
+    "fhd": "https://videos.pexels.com/video-files/39576515/16868149_1920_1080_30fps.mp4"
+   },
+   "portrait": false
+  },
+  {
+   "id": "estar-detalhe",
+   "pexels": 39576533,
+   "t": 3.5,
+   "alt": "Mesa de centro e sofá do estar",
+   "group": "Interiores",
+   "page": "https://www.pexels.com/video/modern-living-room-with-stylish-decor-elements-39576533/",
+   "files": {
+    "uhd": "https://videos.pexels.com/video-files/39576533/16868227_3840_2160_30fps.mp4",
+    "fhd": "https://videos.pexels.com/video-files/39576533/16868225_1920_1080_30fps.mp4"
+   },
+   "portrait": false
+  },
+  {
+   "id": "jantar",
+   "pexels": 39576525,
+   "t": 3.5,
+   "alt": "Sala de jantar com cortinas do piso ao teto",
+   "group": "Interiores",
+   "page": "https://www.pexels.com/video/modern-dining-room-with-natural-lighting-39576525/",
+   "files": {
+    "uhd": "https://videos.pexels.com/video-files/39576525/16868178_3840_2160_30fps.mp4",
+    "fhd": "https://videos.pexels.com/video-files/39576525/16868174_1920_1080_30fps.mp4"
+   },
+   "portrait": false
+  },
+  {
+   "id": "jantar-estar",
+   "pexels": 39576532,
+   "t": 6.5,
+   "alt": "Jantar e estar integrados",
+   "group": "Interiores",
+   "page": "https://www.pexels.com/video/modern-dining-room-with-scenic-views-39576532/",
+   "files": {
+    "uhd": "https://videos.pexels.com/video-files/39576532/16868216_3840_2160_30fps.mp4",
+    "fhd": "https://videos.pexels.com/video-files/39576532/16868203_1920_1080_30fps.mp4"
+   },
+   "portrait": false
+  },
+  {
+   "id": "cozinha",
+   "pexels": 39576534,
+   "t": 6.5,
+   "alt": "Cozinha com bancada e banquetas",
+   "group": "Interiores",
+   "page": "https://www.pexels.com/video/contemporary-interior-with-elegant-dining-area-39576534/",
+   "files": {
+    "uhd": "https://videos.pexels.com/video-files/39576534/16868250_3840_2160_30fps.mp4",
+    "fhd": "https://videos.pexels.com/video-files/39576534/16868246_1920_1080_30fps.mp4"
+   },
+   "portrait": false
+  },
+  {
+   "id": "escada",
+   "pexels": 39576527,
+   "t": 3.5,
+   "alt": "Escada de pedra e jardim interno",
+   "group": "Interiores",
+   "page": "https://www.pexels.com/video/elegant-modern-interior-stairway-design-39576527/",
+   "files": {
+    "uhd": "https://videos.pexels.com/video-files/39576527/16868113_3840_2160_30fps.mp4",
+    "fhd": "https://videos.pexels.com/video-files/39576527/16868104_1920_1080_30fps.mp4"
+   },
+   "portrait": false
+  },
+  {
+   "id": "jardim-interno",
+   "pexels": 39576528,
+   "t": 5.0,
+   "alt": "Jardim interno sob a escada",
+   "group": "Interiores",
+   "page": "https://www.pexels.com/video/modern-interior-with-stylish-plant-arrangement-39576528/",
+   "files": {
+    "uhd": "https://videos.pexels.com/video-files/39576528/16868179_3840_2160_30fps.mp4",
+    "fhd": "https://videos.pexels.com/video-files/39576528/16868175_1920_1080_30fps.mp4"
+   },
+   "portrait": false
+  },
+  {
+   "id": "degraus",
+   "pexels": 39576526,
+   "t": 2.5,
+   "alt": "Degraus de pedra clara",
+   "group": "Interiores",
+   "page": "https://www.pexels.com/video/modern-minimalist-marble-staircase-design-39576526/",
+   "files": {
+    "uhd": "https://videos.pexels.com/video-files/39576526/16868208_3840_2160_30fps.mp4",
+    "fhd": "https://videos.pexels.com/video-files/39576526/16868194_1920_1080_30fps.mp4"
+   },
+   "portrait": false
+  },
+  {
+   "id": "suite",
+   "pexels": 39576531,
+   "t": 4.0,
+   "alt": "Suíte com cabeceira de madeira",
+   "group": "Suítes",
+   "page": "https://www.pexels.com/video/elegant-modern-bedroom-with-lake-view-39576531/",
+   "files": {
+    "uhd": "https://videos.pexels.com/video-files/39576531/16868133_3840_2160_30fps.mp4",
+    "fhd": "https://videos.pexels.com/video-files/39576531/16868124_1920_1080_30fps.mp4"
+   },
+   "portrait": false
+  },
+  {
+   "id": "suite-vista",
+   "pexels": 39576512,
+   "t": 4.0,
+   "alt": "Suíte com janela voltada para a lagoa",
+   "group": "Suítes",
+   "page": "https://www.pexels.com/video/luxurious-modern-bedroom-with-lake-view-39576512/",
+   "files": {
+    "uhd": "https://videos.pexels.com/video-files/39576512/16868089_2160_3840_30fps.mp4",
+    "fhd": "https://videos.pexels.com/video-files/39576512/16868085_1080_1920_30fps.mp4"
+   },
+   "portrait": true
+  },
+  {
+   "id": "janela-mar",
+   "pexels": 39576514,
+   "t": 5.0,
+   "alt": "Cortinas e vista para o mar a partir de um quarto",
+   "group": "Suítes",
+   "page": "https://www.pexels.com/video/scenic-window-view-with-ocean-and-palm-trees-39576514/",
+   "files": {
+    "uhd": "https://videos.pexels.com/video-files/39576514/16868167_3840_2160_30fps.mp4",
+    "fhd": "https://videos.pexels.com/video-files/39576514/16868159_1920_1080_30fps.mp4"
+   },
+   "portrait": false
+  }
+ ]
+}

@@ -1,102 +1,98 @@
 // =====================================================================
 // CADASTRO DO IMÓVEL: tudo o que aparece no site sai daqui.
-// Para apresentar outra casa, duplique este objeto e troque os valores.
-// Campos `null` não aparecem na página (ou aparecem como "a informar"
-// quando estão em `pendingLabel`). Nada aqui é dado real: a Casa Mirante
-// é um imóvel DEMONSTRATIVO, modelado em 3D para esta apresentação.
+//
+// As imagens são REAIS: vídeos de uma única residência no litoral da
+// Bahia, publicados por Alef Morais no Pexels (Licença Pexels, ver
+// src/data/media.js). A casa NÃO está sendo anunciada por este site.
+// Por isso há dois tipos de informação:
+//   - observada: o que se vê nas imagens (materiais, ambientes, vistas);
+//   - `illustrative: true`: números de venda criados só para demonstrar a
+//     ficha. Aparecem sempre com o selo "ilustrativo".
+// Para usar com um imóvel autorizado, troque os valores e marque
+// `demo: false` e `illustrative: false` nos campos confirmados.
 // =====================================================================
-import { houseAreas } from './house.js'
-
-const areas = houseAreas()
+import { media } from './media.js'
 
 export const property = {
-  demo: true, // mostra o selo "Imóvel demonstrativo" e os avisos
+  demo: true,
   name: 'Casa Mirante',
-  tagline: 'Do primeiro traço à última luz do dia.',
-  reference: 'CM-001 (demonstrativo)',
-  status: 'Demonstração', // ex.: "À venda", "Reservado", "Vendido"
+  nameNote: 'Nome criado para esta apresentação',
+  tagline: 'Entre o mar e a lagoa.',
+  reference: 'CM-02',
+  status: 'Apresentação demonstrativa',
   price: {
-    value: 8900000, // valor fictício, só para demonstrar a composição
+    value: 6900000,
     currency: 'BRL',
-    note: 'Valor demonstrativo',
+    illustrative: true,
+    note: 'Valor ilustrativo, não é uma oferta',
   },
 
   address: {
+    region: 'Litoral da Bahia, Brasil',
+    // fonte: perfil do autor das imagens e títulos dos vídeos ("Bahia", "Brazil")
+    regionSource: 'Região indicada pelo autor das imagens',
     street: null,
-    number: null,
-    neighborhood: null,
-    city: null,
-    state: null,
-    zip: null,
-    // Mostrado enquanto o endereço não for cadastrado:
-    placeholder: 'Endereço completo informado no agendamento da visita',
+    placeholder: 'Endereço não divulgado',
   },
 
-  // Coordenadas EXATAS do imóvel. Enquanto for null, o mapa não é exibido.
+  // Coordenadas EXATAS do imóvel. Enquanto forem null, o mapa não aparece.
   location: { lat: null, lng: null, zoom: 16 },
 
-  // Números conferidos contra o modelo 3D (src/data/house.js).
-  facts: {
-    lotArea: areas.lot, // m²
-    builtArea: areas.built, // m²
-    bedrooms: 4,
-    suites: 4,
-    bathrooms: 5, // 4 banhos das suítes + lavabo
-    parking: 2,
-    floors: 2,
-  },
+  // Números da ficha. A área e a divisão real da casa não são públicas.
+  facts: [
+    { k: 'Área construída', v: 420, u: 'm²', illustrative: true },
+    { k: 'Terreno', v: 900, u: 'm²', illustrative: true },
+    { k: 'Suítes', v: 4, illustrative: true },
+    { k: 'Banheiros', v: 5, illustrative: true },
+    { k: 'Vagas', v: 3, illustrative: true },
+    { k: 'Pavimentos', v: 2, note: '+ garagem', illustrative: false },
+  ],
 
-  // Itens com valor null aparecem como "a informar" (estrutura pronta para preencher).
   additional: [
-    { label: 'IPTU anual', value: null },
+    { label: 'IPTU', value: null },
     { label: 'Condomínio', value: null },
     { label: 'Ano de construção', value: null },
-    { label: 'Documentação', value: null },
-    { label: 'Área do pavimento térreo', value: `${fmt(areas.ground)} m²` },
-    { label: 'Área do pavimento superior', value: `${fmt(areas.upper)} m²` },
-    { label: 'Varanda coberta', value: `${fmt(areas.terrace)} m²` },
-    { label: 'Piscina', value: '16 m x 3,8 m, borda infinita' },
-    { label: 'Pavimentos', value: '2' },
+    { label: 'Documentação', value: null, note: 'Não se aplica a esta apresentação' },
+    { label: 'Planta baixa', value: null, note: 'Não divulgada; não foi recriada para não inventar ambientes' },
+    { label: 'Pavimentos', value: '2 + garagem em nível inferior', observed: true },
+    { label: 'Vista', value: 'Lagoa e, de um dos quartos, o mar', observed: true },
+    { label: 'Climatização', value: 'Ar-condicionado tipo cassete', observed: true },
   ],
 
   description: [
-    'A Casa Mirante foi pensada a partir da vista. O térreo é um grande volume de vidro, protegido por um pavimento superior que avança 1,4 metro sobre a fachada e balança 5 metros sobre a varanda leste, criando sombra sem interromper a paisagem.',
-    'Estar, jantar e cozinha formam um único ambiente de 3,2 metros de pé-direito, aberto para o deck e para a piscina de borda infinita. O escritório, o lavabo e a garagem ficam no bloco de concreto aparente a oeste, que funciona como contraponto sólido à transparência do restante da casa.',
-    'No pavimento superior, quatro suítes se voltam para a frente do terreno. Os brises de madeira pivotantes filtram o sol da tarde e garantem privacidade sem fechar a vista. A suíte principal ocupa toda a extremidade do balanço, com closet e banho próprios.',
-    'Imóvel demonstrativo: a casa, os números e o valor foram criados para apresentar esta experiência e não correspondem a uma propriedade real à venda.',
+    'Uma residência contemporânea filmada entre a orla e uma lagoa, no litoral da Bahia. Esta página a apresenta como um imóvel à venda para demonstrar a experiência; as imagens são reais e mostram uma única casa.',
+    'A fachada combina estrutura branca, painel ripado de madeira, pedra clara e grandes panos de vidro. Uma escada de lâminas flutuantes, com luz embutida, leva à porta pivotante de madeira. Ao lado, uma rampa desce para a garagem em nível inferior.',
+    'No térreo, estar e jantar integrados se abrem para a piscina em raia e para o deck de madeira sob o pergolado, voltado para a lagoa. A escada interna, de pedra e guarda-corpo de vidro, nasce de um pequeno jardim. No pavimento superior, as suítes têm cabeceiras em painel de madeira e janelas para a água.',
   ],
+  disclaimer:
+    'Valor, áreas e quantidade de cômodos são ilustrativos. A casa das imagens não está sendo anunciada por este site e aparece apenas como referência visual, em vídeos publicados sob a Licença Pexels. O nome Casa Mirante foi criado para esta apresentação.',
 
-  // Grupos de características. Só entram grupos que existem neste imóvel.
+  // Características que aparecem nas imagens (nenhuma foi suposta).
   features: [
     {
-      group: 'Área externa e lazer',
-      items: ['Piscina de borda infinita com 16 m', 'Deck em pedra clara', 'Varanda coberta de 50 m² sob o balanço', 'Jardim com palmeiras e gramado', 'Jardim na laje do bloco oeste'],
+      group: 'Fachada e acesso',
+      items: ['Escada de lâminas flutuantes com luz embutida', 'Porta pivotante de madeira com puxador vertical', 'Pedra clara no térreo', 'Painel ripado de madeira no pavimento superior', 'Rampa para a garagem em nível inferior'],
     },
     {
-      group: 'Ambientes integrados',
-      items: ['Estar, jantar e cozinha em um só ambiente', 'Pé-direito de 3,2 m no térreo', 'Fachada de vidro piso-teto voltada para a vista', 'Ilha de cozinha em pedra com veios'],
+      group: 'Áreas externas',
+      items: ['Piscina em raia junto à fachada', 'Deck de madeira sob pergolado', 'Varanda com guarda-corpo de vidro', 'Jardim com palmeiras', 'Vista para a lagoa'],
     },
     {
-      group: 'Suítes e espaços privativos',
-      items: ['4 suítes no pavimento superior', 'Suíte principal com closet e banho', 'Brises de madeira pivotantes em todas as suítes'],
+      group: 'Interiores',
+      items: ['Estar e jantar integrados', 'Cortinas do piso ao teto', 'Pendentes de fibra natural', 'Cozinha com bancada e banquetas', 'Escada de pedra com guarda-corpo de vidro', 'Jardim interno sob a escada'],
     },
     {
-      group: 'Ambientes adicionais',
-      items: ['Escritório no térreo', 'Lavabo', 'Garagem fechada para 2 carros'],
-    },
-    {
-      group: 'Arquitetura e materiais',
-      items: ['Estrutura em concreto aparente', 'Balanço de 5 m sem pilares', 'Concreto com marca de fôrma de madeira', 'Forro de madeira sob o balanço', 'Esquadrias de alumínio em tom bronze'],
+      group: 'Suítes',
+      items: ['Cabeceiras em painel de madeira', 'Janelas voltadas para a lagoa', 'Vista para o mar a partir de um dos quartos'],
     },
   ],
-
-  // Itens que dependem do imóvel real ficam aqui para não serem inventados.
-  pendingFeatures: ['Climatização', 'Automação', 'Segurança', 'Condomínio e infraestrutura'],
+  // O que não dá para confirmar pelas imagens fica listado, sem valor inventado.
+  pendingFeatures: ['Áreas reais', 'Número exato de suítes e banheiros', 'IPTU e condomínio', 'Segurança e automação', 'Infraestrutura do condomínio'],
 
   contact: {
-    // Preencha para ativar os canais. Enquanto estiverem null, o formulário
+    // Preencha para ativar os canais. Enquanto forem null, o formulário
     // funciona em modo demonstração (nada é enviado).
-    whatsapp: null, // somente dígitos com DDI, ex.: '5511999999999'
+    whatsapp: null, // somente dígitos com DDI, ex.: '5571999999999'
     email: null,
     agentName: null,
     agency: null,
@@ -105,48 +101,28 @@ export const property = {
   },
 }
 
-// Etapas da obra (sequência fixa da rolagem).
+// Revelação da fachada (seção #obra). `at` = início da etapa, em fração da rolagem da seção.
 export const stages = [
-  { id: 'blueprint', n: '01', kicker: 'Blueprint', title: 'O projeto', text: 'Antes da primeira pá de terra, cada linha da casa já existe no papel.' },
-  { id: 'fundacao', n: '02', kicker: 'Fundação', title: 'O chão firme', text: 'Sapatas, vigas baldrame e a laje do térreo. A piscina é escavada junto.' },
-  { id: 'estrutura', n: '03', kicker: 'Estrutura', title: 'O esqueleto', text: 'Pilares, núcleo da escada e as lajes que permitem o balanço de 5 metros.' },
-  { id: 'fachada', n: '04', kicker: 'Fachada', title: 'A pele', text: 'Alvenaria, reboco, vidro piso-teto e os brises de madeira.' },
-  { id: 'final', n: '05', kicker: 'Concluída', title: 'A casa', text: 'Paisagismo, água na piscina e a luz do fim de tarde.' },
+  { id: 'blueprint', n: '01', kicker: 'Desenho', title: 'O traço', text: 'Linhas traçadas sobre a fachada real: cobertura, lajes, vãos e a escada de lâminas.', at: 0 },
+  { id: 'volumes', n: '02', kicker: 'Volumes', title: 'As massas', text: 'Dois pavimentos sobre um nível de garagem. A laje superior avança sobre o térreo de vidro.', at: 0.3 },
+  { id: 'materiais', n: '03', kicker: 'Materiais', title: 'A matéria', text: 'Madeira, pedra clara, vidro e estrutura branca, revelados na fotografia da própria casa.', at: 0.5 },
+  { id: 'casa', n: '04', kicker: 'A casa', title: 'Pronta', text: 'Entre palmeiras, exatamente como foi filmada.', at: 0.9 },
 ]
 
-// Cenas da apresentação (câmera em src/three/director.js, mesma ordem).
+// Ambientes da seção #casa (cada um é um vídeo real controlado pela rolagem).
 export const scenes = [
-  { id: 'residencia', title: 'A residência', text: 'Dois volumes, um sobre o outro. O de cima avança sobre a vista.' },
-  { id: 'piscina', title: 'Borda infinita', text: 'Dezesseis metros de água que terminam onde o vale começa.' },
-  { id: 'sala', title: 'Sala integrada', text: 'Vidro do piso ao teto. A paisagem entra pela sala inteira.' },
-  { id: 'balanco', title: 'O balanço', text: 'Cinco metros sem pilares, com forro de madeira por baixo.' },
-  { id: 'noite', title: 'Ao anoitecer', text: 'A casa acende por dentro e a piscina vira luz.' },
+  { clip: 'entrada', title: 'Entrada', text: 'A porta pivotante de madeira, entre painéis de pedra clara.' },
+  { clip: 'escada', title: 'A escada', text: 'Degraus de pedra, guarda-corpo de vidro e um jardim interno.' },
+  { clip: 'estar', title: 'Estar', text: 'Luz filtrada pelas cortinas, madeira e tecidos claros.' },
+  { clip: 'jantar', title: 'Jantar', text: 'Mesa longa sob pendentes de fibra, integrada ao estar.' },
+  { clip: 'suite', title: 'Suíte', text: 'Cabeceira em madeira e a lagoa na janela.' },
+  { clip: 'varanda', title: 'Varanda', text: 'Do pavimento superior, a piscina e a lagoa no mesmo quadro.' },
+  { clip: 'pergolado', title: 'Pergolado', text: 'O deck de madeira voltado para a água.' },
+  { clip: 'piscina', title: 'Piscina', text: 'A raia acompanha a fachada envidraçada até o jardim.' },
 ]
 
-// Destaques numerados (estilo editorial), cada um com uma imagem renderizada do modelo.
-export const highlights = [
-  { n: '01', title: 'Acima da vista', text: 'O pavimento superior avança sobre a fachada e enquadra o vale.', image: 'balanco-frente' },
-  { n: '02', title: 'Brises de madeira', text: 'Painéis pivotantes que regulam sol, vento e privacidade.', image: 'brises' },
-  { n: '03', title: 'Concreto aparente', text: 'A marca da fôrma de madeira fica registrada na parede.', image: 'concreto' },
-  { n: '04', title: 'Vidro piso-teto', text: 'Esquadrias finas para que a paisagem seja a parede.', image: 'sala' },
-  { n: '05', title: 'Borda infinita', text: 'A água se encontra com o horizonte no fim da tarde.', image: 'piscina' },
-]
-
-// Galeria: arquivos em public/img/<id>-1600.webp e <id>-800.webp (gerados por `npm run capture`).
-export const gallery = [
-  { id: 'fachada', alt: 'Fachada frontal da Casa Mirante ao fim da tarde', group: 'Fachada' },
-  { id: 'aerea', alt: 'Vista aérea da casa, do deck e da piscina', group: 'Fachada' },
-  { id: 'balanco-frente', alt: 'Pavimento superior em balanço sobre a fachada de vidro', group: 'Fachada' },
-  { id: 'piscina', alt: 'Piscina de borda infinita com o vale ao fundo', group: 'Área externa' },
-  { id: 'deck', alt: 'Deck em pedra clara entre a casa e a piscina', group: 'Área externa' },
-  { id: 'varanda', alt: 'Varanda coberta sob o balanço, com forro de madeira', group: 'Área externa' },
-  { id: 'sala', alt: 'Sala integrada com vista para a piscina através do vidro', group: 'Interiores' },
-  { id: 'cozinha', alt: 'Cozinha com ilha de pedra e pendentes', group: 'Interiores' },
-  { id: 'suite', alt: 'Suíte principal com luz filtrada pelos brises', group: 'Interiores' },
-  { id: 'brises', alt: 'Detalhe dos brises de madeira pivotantes', group: 'Detalhes' },
-  { id: 'concreto', alt: 'Parede de concreto aparente do bloco oeste', group: 'Detalhes' },
-  { id: 'noite', alt: 'A casa iluminada ao anoitecer', group: 'Fachada' },
-]
+// Galeria: quadros dos vídeos (public/img/<id>-1600.webp e -800.webp, gerados por tools/media.py).
+export const gallery = media.stills
 
 export function fmt(n) {
   return Number(n).toLocaleString('pt-BR', { maximumFractionDigits: 1 })

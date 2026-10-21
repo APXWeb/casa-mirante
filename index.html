@@ -2,15 +2,16 @@
 <html lang="pt-BR" class="no-js">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>@@name@@ · Residência contemporânea (imóvel demonstrativo)</title>
-    <meta name="description" content="@@name@@: a construção de uma residência contemporânea acontece enquanto você rola a página, do blueprint à casa pronta. Imóvel demonstrativo." />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>@@name@@ · Residência contemporânea no @@region@@ (apresentação demonstrativa)</title>
+    <meta name="description" content="@@name@@: uma residência contemporânea real, filmada entre o mar e a lagoa no @@region@@, apresentada do desenho à casa pronta. Apresentação demonstrativa com imagens licenciadas." />
     <meta name="theme-color" content="#0e0d0b" />
     <meta property="og:title" content="@@name@@" />
     <meta property="og:description" content="@@tagline@@" />
-    <meta property="og:image" content="img/fachada-1600.webp" />
+    <meta property="og:image" content="img/fachada-frontal-1600.webp" />
     <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230e0d0b'/%3E%3Cpath d='M6 21h20M9 21v-6h16v6M7 15h20M12 15v-4h13v4' stroke='%23c8a46e' stroke-width='2' fill='none'/%3E%3C/svg%3E" />
-    <link rel="preload" as="image" href="img/poster-1600.webp" imagesrcset="img/poster-800.webp 800w, img/poster-1600.webp 1600w" imagesizes="100vw" />
+    <link rel="preload" as="image" href="img/poster/drone-d-a.webp" media="not ((orientation: portrait) and (max-aspect-ratio: 25/27))" />
+    <link rel="preload" as="image" href="img/poster/drone-m-a.webp" media="(orientation: portrait) and (max-aspect-ratio: 25/27)" />
     <script>
       document.documentElement.classList.replace('no-js', 'js')
       if ('scrollRestoration' in history) history.scrollRestoration = 'manual'
@@ -22,25 +23,32 @@
     <header class="top" data-top>
       <a class="brand" href="#abertura" aria-label="@@name@@, início">@@name@@</a>
       <nav class="nav" aria-label="Seções">
-        <a href="#obra">A obra</a>
-        <a href="#casa">A casa</a>
-        <a href="#ficha">Ficha</a>
+        <a href="#obra">A fachada</a>
+        <a href="#casa">Ambientes</a>
         <a href="#galeria">Galeria</a>
-        <a href="#planta">Planta</a>
+        <a href="#ficha">Ficha</a>
       </nav>
       <a class="btn btn-ghost top-cta" href="#contato">Agendar visita</a>
-      <span class="demo-badge" title="Os dados desta página são fictícios">Demonstrativo</span>
+      <span class="demo-badge" title="Imagens reais licenciadas; dados de venda ilustrativos">Demonstrativo</span>
     </header>
 
-    <!-- palco fixo: WebGL (ou imagens, sem WebGL) atrás das seções cinematográficas -->
+    <!-- palco fixo: vídeos reais e a prancha da fachada atrás das seções cinematográficas -->
     <div class="stage" data-stage aria-hidden="true">
-      <img class="poster" src="img/poster-1600.webp" srcset="img/poster-800.webp 800w, img/poster-1600.webp 1600w" sizes="100vw" alt="" fetchpriority="high" data-poster />
-      <div class="fallback" data-fallback></div>
-      <canvas class="gl" data-gl></canvas>
-      <div class="shade"></div>
-      <div class="notes" data-notes></div>
+      <div class="layer l-hero" data-layer="hero"><!--@heroLayer--></div>
+      <div class="layer l-plate" data-layer="plate">
+        <div class="sheet" data-sheet>
+          <!--@plate-->
+          <div class="plate-labels" data-labels><!--@plateLabels--></div>
+        </div>
+        <div class="sheet-frame" data-frame>
+          <span class="tick t1"></span><span class="tick t2"></span><span class="tick t3"></span><span class="tick t4"></span>
+          <p class="title-block"><b>@@name@@</b><span>Elevação frontal</span><span>Desenho sobre fotografia real · sem escala</span></p>
+        </div>
+      </div>
+      <div class="layer l-scenes" data-layer="scenes"><!--@sceneLayers--></div>
+      <div class="veil" data-veil></div>
+      <div class="shade" data-shade></div>
     </div>
-    <div class="loader" data-loader><span class="loader-bar"><i data-loader-bar></i></span><span class="loader-k">Preparando a obra</span></div>
 
     <main>
       <section id="abertura" class="pin pin-hero" data-pin="hero" aria-labelledby="hero-title">
@@ -51,88 +59,65 @@
             <p class="hero-tag">@@tagline@@</p>
           </div>
           <div class="hero-cue" data-hero-cue>
-            <span>Role para ver a casa ser construída</span>
+            <span>Role devagar</span>
             <i aria-hidden="true"></i>
           </div>
-          <p class="scan-note" data-scan-note>Antes de ser casa, ela foi desenho.</p>
+          <p class="hero-line" data-hero-line="0">Uma casa contemporânea<br />entre a orla e a lagoa.</p>
+          <p class="hero-line" data-hero-line="1">Do alto, um volume branco<br />entre o verde e a água.</p>
+          <p class="veil-note" data-veil-note>Antes de ser casa,<br />ela foi desenho.</p>
         </div>
       </section>
 
-      <section id="obra" class="pin pin-obra" data-pin="obra" aria-label="A construção da casa">
+      <section id="obra" class="pin pin-obra" data-pin="obra" aria-label="Da linha à casa pronta: revelação da fachada">
         <div class="sticky">
           <ol class="stage-caps"><!--@stages--></ol>
           <div class="build-meter" data-meter>
             <ol class="ticks"><!--@stageTicks--></ol>
             <div class="bar"><i data-bar></i></div>
-            <span class="pct"><b data-pct>0</b>%</span>
+            <ol class="mat-chips" aria-hidden="true"><!--@matChips--></ol>
           </div>
         </div>
       </section>
 
-      <section id="casa" class="pin pin-casa" data-pin="casa" aria-label="Apresentação da casa pronta">
+      <section id="casa" class="pin pin-casa" data-pin="casa" aria-label="Ambientes da casa">
         <div class="sticky">
           <ol class="scene-caps"><!--@scenes--></ol>
+          <div class="scene-meter" data-scene-meter><i data-scene-bar></i></div>
         </div>
       </section>
 
       <div class="after">
-        <section id="numeros" class="numbers" aria-label="A casa em números">
-          <p class="eyebrow">Cada ambiente</p>
-          <h2 class="display">Feita para a vista.</h2>
-          <ul class="num-list"><!--@numbers--></ul>
-        </section>
-
-        <section id="destaques" class="highlights" aria-label="Destaques da arquitetura">
-          <!--@highlights-->
-        </section>
-
         <section class="manifesto" aria-label="Manifesto">
-          <figure class="manifesto-media"><img src="img/noite-1600.webp" srcset="img/noite-800.webp 800w, img/noite-1600.webp 1600w" sizes="100vw" alt="" loading="lazy" decoding="async" /></figure>
+          <figure class="manifesto-media" data-manifesto><!--@manifestoMedia--></figure>
           <div class="manifesto-copy">
             <h2 class="display">Não é só uma casa.</h2>
-            <p>É o ponto do terreno em que a paisagem vira parte da sala.</p>
+            <p>É o lugar onde a lagoa entra pela janela.</p>
           </div>
-        </section>
-
-        <section id="ficha" class="ficha paper" aria-label="Ficha do imóvel">
-          <!--@ficha-->
-          <p class="demo-note">Imóvel demonstrativo: nome, valores, áreas e características foram criados para esta apresentação e não correspondem a uma propriedade real à venda.</p>
         </section>
 
         <section id="galeria" class="gallery" aria-labelledby="gal-title">
           <div class="sec-head">
             <p class="eyebrow">Galeria</p>
-            <h2 id="gal-title" class="display">Fachada, interiores e detalhes.</h2>
-            <p class="muted small">Imagens renderizadas a partir do modelo 3D da casa.</p>
+            <h2 id="gal-title" class="display">Uma casa, vista de perto.</h2>
+            <p class="muted small">Quadros dos vídeos originais, todos da mesma residência. Toque para ampliar.</p>
           </div>
           <div class="chips" role="group" aria-label="Filtrar imagens"><!--@galleryFilters--></div>
           <ul class="g-grid" data-grid><!--@gallery--></ul>
           <script type="application/json" data-gallery><!--@galleryData--></script>
         </section>
 
-        <section id="planta" class="plan paper" aria-labelledby="plan-title">
-          <div class="sec-head">
-            <p class="eyebrow">Planta e localização</p>
-            <h2 id="plan-title" class="display">Dois pavimentos, uma vista.</h2>
-          </div>
-          <div class="plan-tabs" role="tablist" aria-label="Pavimento">
-            <button type="button" role="tab" id="tab-ground" aria-controls="plan-ground" aria-selected="true" class="chip is-on">Térreo</button>
-            <button type="button" role="tab" id="tab-upper" aria-controls="plan-upper" aria-selected="false" class="chip" tabindex="-1">Superior</button>
-          </div>
-          <div class="plan-panels">
-            <div id="plan-ground" role="tabpanel" aria-labelledby="tab-ground" class="plan-panel"><!--@planGround--></div>
-            <div id="plan-upper" role="tabpanel" aria-labelledby="tab-upper" class="plan-panel" hidden><!--@planUpper--></div>
-          </div>
+        <section id="ficha" class="ficha paper" aria-label="Ficha do imóvel">
+          <!--@ficha-->
           <div class="location"><!--@location--></div>
         </section>
 
         <section id="contato" class="contact" aria-labelledby="contact-title">
-          <figure class="contact-media"><img src="img/fachada-1600.webp" srcset="img/fachada-800.webp 800w, img/fachada-1600.webp 1600w" sizes="100vw" alt="" loading="lazy" decoding="async" /></figure>
+          <figure class="contact-media"><img src="img/pergolado-1600.webp" srcset="img/pergolado-800.webp 800w, img/pergolado-1600.webp 1600w" sizes="100vw" alt="" loading="lazy" decoding="async" /></figure>
           <div class="contact-inner">
             <div class="contact-copy">
               <p class="eyebrow">Visita</p>
               <h2 id="contact-title" class="display">Conheça a casa pessoalmente.</h2>
-              <p>Agende uma visita ou peça mais informações. Respondemos com disponibilidade de datas e a documentação do imóvel.</p>
+              <p>Agende uma visita ou peça mais informações. Nesta apresentação demonstrativa o formulário funciona, mas nenhum dado é enviado.</p>
               <!--@contactAgent-->
               <a class="btn btn-wa" href="#" data-wa hidden>Conversar pelo WhatsApp</a>
             </div>
@@ -156,10 +141,15 @@
       </div>
     </main>
 
-    <footer class="foot">
+    <footer class="foot" id="creditos">
       <p class="foot-brand">@@name@@</p>
-      <p>Imóvel demonstrativo. A casa, as imagens e os dados desta página foram criados para apresentar esta experiência.</p>
-      <p class="muted small">Imagens geradas a partir do modelo 3D desta página. Céu HDRI, texturas e mobiliário: Poly Haven (CC0). Fontes Fraunces e Figtree (OFL).</p>
+      <p>Apresentação demonstrativa. A residência das imagens é real e não está sendo anunciada por este site; valor, áreas e número de cômodos são ilustrativos.</p>
+      <!--@credits-->
+      <details class="credit-list">
+        <summary>Vídeos usados nesta página</summary>
+        <ul><!--@creditList--></ul>
+      </details>
+      <p class="muted small">Fontes Fraunces e Figtree (SIL Open Font License).</p>
     </footer>
 
     <dialog class="lightbox" data-lightbox aria-label="Galeria ampliada">
